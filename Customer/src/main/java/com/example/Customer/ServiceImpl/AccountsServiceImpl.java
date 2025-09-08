@@ -6,6 +6,7 @@ import com.example.Customer.Service.AccountsService;
 import com.example.Customer.Service.CustomerService;
 import com.example.Customer.entity.Accounts;
 import com.example.Customer.entity.Customer;
+import com.example.Customer.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class AccountsServiceImpl implements AccountsService {
     public Accounts getAccount(Long AccountNo)
     {
         Accounts acc= accountsRepository.findById(AccountNo).orElseThrow(
-                ()-> new RuntimeException("No Account Found")
+                ()-> new ResourceNotFoundException("No Account Found with "+AccountNo)
         );
         return acc;
     }

@@ -3,6 +3,7 @@ package com.example.Loans.ServiceImpl;
 import com.example.Loans.Repository.LoansRepository;
 import com.example.Loans.Service.LoansService;
 import com.example.Loans.entity.Loans;
+import com.example.Loans.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class LoansServiceImpl implements LoansService {
     @Override
     public Loans getLoan(Long loanId) {
         return loansRepository.findById(loanId)
-                .orElseThrow(() -> new RuntimeException("Loan not found with id " + loanId));
+                .orElseThrow(() -> new ResourceNotFoundException("Loan not found with id " + loanId));
     }
 
 

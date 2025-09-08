@@ -4,6 +4,7 @@ package com.example.Customer.ServiceImpl;
 import com.example.Customer.Repository.CustomerRepository;
 import com.example.Customer.Service.CustomerService;
 import com.example.Customer.entity.Customer;
+import com.example.Customer.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,8 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findCustomer(Long customerId)
     {
         return customerRepository.findById(customerId).orElseThrow(
-                () -> new RuntimeException("Customer With Given Id Not Found")
+                () -> new ResourceNotFoundException("Customer With Given Id Not Found." +
+                        "Please Check Your Id: "+customerId)
         );
     }
 
